@@ -14,6 +14,19 @@ int main()
     1 <= B < M;
     A != B;
     C = M - A - B;
-    printf("A idade do filho mais velho e : %d", C);
+    if (A>=B && A>=C)
+    {
+        printf("A idade do filho mais velho e : %d", A);
+    }else if (C>=B && C>=A)
+    {
+        printf("A idade do filho mais velho e : %d", C);
+    }else if (B>=A && B>=C)
+    {
+        printf("A idade do filho mais velho e : %d", B);
+    }
+
+    
+    
+    
     return 0;
 }
