@@ -8,14 +8,10 @@ int main(){
     for (int i = 0; i < n; i++)
     {
         printf("digite 3 valores:\n");
-        scanf("%lf %lf %lfs",&n1,&n2,&n3);
+        scanf("%lf %lf %lf",&n1,&n2,&n3);
         media=((n1*2)+(n2*3)+(n3*5))/(3+2+5);
-        printf("A media ponderada e: %.1lf \n",media);
-
-
+        printf("A media ponderada  do e: %.1lf \n",media);
 
     }
-    
-
     return 0;
 }
