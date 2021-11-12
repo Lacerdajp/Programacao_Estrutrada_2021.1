@@ -7,8 +7,7 @@ int main()
     scanf("%d", &n);
     for (int i = 0; i < n; i++)
     {
-        scanf("%d", &v);
-        x[i] = v;
+        scanf("%d", &x[i]);
         var = 0;
         for (int z = 0; z < i; z++)
         {
