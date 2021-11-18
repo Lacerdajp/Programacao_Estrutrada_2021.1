@@ -3,7 +3,8 @@
 int main()
 {
     int n = 0, notas[100], posicao[100], x = 0, f = 0;
-    scanf("%d", &n);
+    scanf("%d %d" , &n,&x);
+    
     for (int i = 0; i < n; i++)
     {
         scanf("%d", &notas[i]);
@@ -28,18 +29,18 @@ int main()
           {
              if (notas[z] ==i )
              {
-                 posicao[x]=notas[z];
+                 posicao[f]=notas[z];
              }
           }
-          if (posicao[x]!=11)
+          if (posicao[f]!=11)
           {
-              x++;
+              f++;
           }
           
          
     }
     
-     printf("%d ",posicao[4]);
+     printf("%d ",posicao[x-1]);
     
     
     
