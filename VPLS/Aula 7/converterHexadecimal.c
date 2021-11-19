@@ -1,7 +1,12 @@
 #include <stdio.h>
 int main(){
-    int dec=0,casa[11], x=0, i=0;
+    int dec=0,casa[11], x=0, i=0,count=0;
     char hexa[11];
+    for (int i = 0; i < 11; i++)
+    {
+        hexa[i]=0;
+    }
+    
     scanf("%d", &dec);
     
     for (;dec!=0;i++)
@@ -16,9 +21,9 @@ int main(){
         }
         
         dec=dec/16;    
+        
     }
-    printf("%d",i);
-   
+    
     for (int z = 0; z < i; z++)
     {
         switch (casa[z])
@@ -41,11 +46,10 @@ int main(){
         case 15: hexa[z]='F';break;
         default: hexa[z]='0';break;
         }
-     
-   
+       
     }
-
-     printf("%s",hexa);
+    printf("%s",hexa);
+    
 
     return 0;
 }
