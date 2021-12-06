@@ -19,6 +19,10 @@ int main(){
         do {scanf("%d",&x);}
         while (x<0||x>=1073741824);
        num1=0,num2=0;
+       if (fib[num1]+fib[num2]==x)
+            {
+                printf("S\n");
+            }
         while (fib[num1]+fib[num2]!=x)
         {
             if (fib[num2]>x)

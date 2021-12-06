@@ -39,8 +39,6 @@ int main(){
                             z--;
                 
                         }
-                        
-                       
                     }
             }else{ 
                     test=0;                    

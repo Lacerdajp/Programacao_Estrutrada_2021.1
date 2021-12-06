@@ -18,8 +18,7 @@ int main(){
         scanf("%d %d%c %d %d %d",&d1,&m1,&c[i],&d2,&m2,&ano);
         } while ((ano>2099||ano<1900)&&(m1>12||m1<=0)&&(m2>12||m2<=0)&&(d2>31||d2<=0)&&(d1>31||d1<=0));
         
-       
-            somadia=d1-d2;
+        somadia=d1-d2;
            
         
         if (m2==4||m2==6||m2==9||m2==11 )
@@ -56,9 +55,7 @@ int main(){
             somatotal=somadia+somames;
         }
         
-    
-       printf("%d\n",somatotal);
-
+        printf("%d\n",somatotal);
         
     }
     
