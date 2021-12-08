@@ -59,8 +59,6 @@ int transType(char num[], char tipo[],int tam){
                 numero[i]=9;
                 break; 
             }
-            
-            
         }
         
     }else if (tipo[0]=='b')
