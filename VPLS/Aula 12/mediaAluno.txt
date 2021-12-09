@@ -1,0 +1,6 @@
+Joao Pedro;
+10.0; 
+10.0;
+Alice Alemeida;
+7.0;
+8.0;

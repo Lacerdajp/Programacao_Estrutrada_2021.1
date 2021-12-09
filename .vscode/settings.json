@@ -2,6 +2,7 @@
     "files.associations": {
         "stdio.h": "c",
         "*.tcc": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "MINHOCA.C": "cpp"
     }
 }
