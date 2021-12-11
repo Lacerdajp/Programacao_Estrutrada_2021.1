@@ -1,23 +1,84 @@
+#include<stdio.h>
 #include<stdlib.h>
-char caminho(int d );
-char buscar(char matriz[][], int d);
+int insertPilha(char matriz[100][100], int d);
+int caminho(int d );                             
 int main(){
-    int d=0;
+    int d=0,f=0;
     scanf("%d",&d);
-    caminho(d);
+    f=caminho(d);
+    printf("%d",f);
     return 0;
 }
-char caminho(int d){
-    char matriz[d][d]={0};
+int caminho(int d){
+    char matriz[100][100];
+    int z;
     for (int i = 0; i < d; i++)//linhas
     {
-        for (int j = 0; j < d; j++)//colunas
+        for (int z = 0; z < d; z++)//colunas
         {
-            scanf("%c",matriz[i][j]);
+            scanf("%1s",&matriz[i][z]);
         }
     }
-    buscar(matriz,d);
+    z=insertPilha(matriz, d);
+    return z ;
 }
-char buscar(char matriz[][], int d){
-    int count=0,linhas=0,colunas=0,m1=0;
+int insertPilha(char matriz[100][100], int d){
+    int t=0, i=0,a=d,count=0;
+    char x=0,z=0;
+    while (count!=d*d){ 
+       
+        for (i=t,a=d-t; i < a; i++)
+        {
+            
+            x=matriz[t][i];
+            
+            count++;
+            if(x=='o'){
+                break;
+            }
+        }
+        if(x=='o'){
+                break;
+            }
+            
+        for (i=t+1 , a=d-t; i < a; i++)
+        {
+            x=matriz[i][a-1];
+           count++;
+            if(x=='o'){
+                break;
+            }
+        }
+        if(x=='o'){
+                break;
+            }
+            
+        for (i=t, a=d-t-1-1; i <= a; a--)
+        { 
+            x=matriz[a][i];
+           count++;
+            if(x=='o'){
+                break;
+            }
+        }
+         
+          if(x=='o'){
+                break;
+            }
+            
+        for (i=t+1, a=d-t-1-1; i <= a; a--)
+        { 
+            x=matriz[t][a];
+           count++;
+            if(x=='o'){
+                break;
+            }
+        }
+        if(x=='o'){
+                break;
+            }
+        t++;
+    }
+    
+    return  count-1;
 }
