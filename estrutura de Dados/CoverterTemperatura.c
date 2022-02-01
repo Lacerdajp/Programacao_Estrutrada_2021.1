@@ -1,4 +1,4 @@
-#include"../../LibsJPLS/convertTemperatura.c"
+#include"../../LibsJPLS/convertTemperatura.h"
 int main(){ 
     float temp1=0,temp2=0;
     scanf("%f",&temp1);
