@@ -6,7 +6,7 @@ int main(){
     int v[1000];
     scanf("%d",&n);
     *v=incluir_vetorNumber(n,*v);
-    k=testa_PA(n,*v);
+    testa_PA_sem_return(n,*v,&k);
     printf("%d",k);
     return 0;
 
