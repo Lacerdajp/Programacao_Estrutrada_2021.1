@@ -1,6 +1,14 @@
 #include <stdio.h>
-#include "../../../LibsJPLS/polinomios.h"
+#include <math.h>
 #include "../../../LibsJPLS/vetores.h"
+double avaliacaoDePolinomio_SemReturn(double* poli, int grau, double x,double *resultado){
+    for (int i = 0; i <= grau; i++)
+    {
+        *resultado= *resultado + (poli[i]*pow(x,i));
+    }
+    
+    
+}
 int main(){
     double  poli[]={};
     double resultado=0,x=0;
