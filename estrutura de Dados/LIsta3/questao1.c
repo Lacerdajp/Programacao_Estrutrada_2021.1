@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<string.h>
 struct lista
 {
     char* str;
@@ -25,7 +26,7 @@ void lst_imprime(Lista* lst){
 Lista* lst_retirar(Lista*lst,char* str){
     Lista* ant =NULL;
     Lista* p=lst;
-    while (p!=NULL && p->str!=str)
+    while (p!=NULL && strcmp(p->str,str)!=0)
      {
         ant =p;
         p=p->prox;
