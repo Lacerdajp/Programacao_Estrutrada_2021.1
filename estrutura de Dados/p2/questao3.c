@@ -1,3 +1,5 @@
+// incomplete
+
 #include <stdio.h>
 #include <stdlib.h>
 struct pilha
@@ -27,6 +29,14 @@ Pilha *push_pilha(Pilha *p, int val)
 Pilha *pop_pilha(Pilha *p, int val)
 {
 }
+Pilha* passagem_pilha(Pilha*coloca,Pilha*tira){
+    Pilha*j;
+    for (  j= tira; j!=NULL; j=j->penultimo)
+    {
+        coloca=push_pilha(coloca,j->valor);
+    }
+    return coloca;
+}
 Fila *criar_fila()
 {
     Fila *fil = (Fila *)malloc(sizeof(Fila));
@@ -34,10 +44,20 @@ Fila *criar_fila()
     fil->pb = criar_pilha();
     return fil;
 }
-Fila* push_fila()
+Fila* push_fila(Fila*p,int val){
+    p->pa=passagem_pilha(p->pa,p->pb);
+    Fila *fil = (Fila *)malloc(sizeof(Fila));
+    fil->pa=push_pilha(p->pa,val);
+    fil->pb=NULL;
+    return fil;
+}
+
 
 int main()
 {
-    /* code */
+    Fila*fil;
+    fil=criar_fila();
+    fil=push_fila(fil,10);
+    fil=push_fila(fil,20);
     return 0;
 }
