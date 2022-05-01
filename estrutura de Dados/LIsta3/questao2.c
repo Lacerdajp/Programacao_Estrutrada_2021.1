@@ -78,9 +78,10 @@ int main(){
      lstAlunos=inserir_lst(lstAlunos,"Jorge Durte",5.0);
      lstAlunos=inserir_lst(lstAlunos,"Thiagp Medeiros",4.9);
 
-    imprimir_total(lstAlunos);
+   imprimir_total(lstAlunos);
 
-    lstAprovados=lst_aprovados(lstAlunos);
+    lstAprovados=lst_aprovados(lstAlunos); 
+    
     imprimir_total(lstAprovados);
 
     numeroAprovados=aprovados(lstAlunos);
