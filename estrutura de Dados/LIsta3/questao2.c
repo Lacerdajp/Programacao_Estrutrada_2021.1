@@ -76,7 +76,7 @@ int main(){
      lstAlunos=inserir_lst(lstAlunos,"Douglas Schereer",3.0);
      lstAlunos=inserir_lst(lstAlunos,"Joao Pedro Lacerda",10.0);
      lstAlunos=inserir_lst(lstAlunos,"Jorge Durte",5.0);
-     lstAlunos=inserir_lst(lstAlunos,"Thiagp Medeiros",4.9);
+     lstAlunos=inserir_lst(lstAlunos,"Thiago Medeiros",4.9);
 
     imprimir_total(lstAlunos);
 
@@ -85,8 +85,4 @@ int main(){
 
     numeroAprovados=aprovados(lstAlunos);
     printf("Quantidade de Aprovados: %d",numeroAprovados);
-    
-
-
-
 }
