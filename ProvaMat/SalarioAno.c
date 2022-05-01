@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string.h>
+#define TAMANHO 12
 struct string
 {
     char nome[100];
@@ -22,20 +23,39 @@ void inserirMes(String mes[]){
 }
 void inserirSalario(double salario[],String mes[]){
     printf("Insira os valores: \n");
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < TAMANHO; i++)
     {
         printf("%s = ",mes[i].nome);
-        scanf("%lf",salario[i]);
+        scanf("%lf",&salario[i]);
     }
+    
+}
+double calculoAnual(double salario[]){
+    double soma=0;
+    for (int i = 0; i < TAMANHO; i++)
+    {
+        soma=soma+salario[i];
+    }
+    return soma;
+    
+}
+void imprimir(String mes[],double salario[],double salarioAnual){
+    printf("Mes     Valor- R$\n");
+    for (int i = 0; i < TAMANHO; i++)
+    {
+         printf("%s = %.2lf \n",mes[i].nome,salario[i]);
+    }
+    printf("Salario Anual= %.2lf",salarioAnual);
     
 }
 
 int main(){
-    String mes[12];
-    double salario[12];
+    String mes[TAMANHO];
+    double salario[TAMANHO];
+    double salarioAnual=0;
     inserirMes(mes);
     inserirSalario(salario,mes);
-
-    
+    salarioAnual=calculoAnual(salario);
+    imprimir(mes,salario,salarioAnual);
     
 }
