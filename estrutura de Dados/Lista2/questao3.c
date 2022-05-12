@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <math.h>
-#include "../../../LibsJPLS/vetores.h"
+double incluir_vetorReais(int n, double* v ){
+    for (int i = 0; i < n; i++)
+    {
+        printf("numero %i : \n",i);
+        scanf("%lf",&v[i]);
+        printf("%.2lf\n", v[i]);
+
+    }
+    return *v;
+} 
 double avaliacaoDePolinomio(double* poli, int grau, double x){
     double resultado= 0;
     for (int i = 0; i <= grau; i++)

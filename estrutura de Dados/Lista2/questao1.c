@@ -1,5 +1,11 @@
 #include<stdio.h>
-#include "../../../LibsJPLS/vetores.h"
+int incluir_vetorNumber(int *v, int n){
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d",v[i]);
+    }
+    return *v;
+} 
 int testa_PA(int n, int *v) {
     int k=0,x=0;
         
