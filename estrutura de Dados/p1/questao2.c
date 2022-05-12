@@ -1,6 +1,7 @@
 #include <stdio.h>
 int inserir(int *v, int n);
-int bolha(int *v, int n) int main()
+int bolha(int *v, int n);
+ int main()
 {
     int v[6];
     inserirvetor(&v);
