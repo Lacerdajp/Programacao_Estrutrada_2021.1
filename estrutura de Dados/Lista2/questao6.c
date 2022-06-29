@@ -9,7 +9,7 @@ void rodar_string(char *str){
         {
             str[i]=ultimo;
         }
-        else{
+        else{ 
             str[i]=str[i-1];
         }
     }
