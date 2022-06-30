@@ -61,7 +61,12 @@ int main(){
     {
         for (int j = 1; j <= nColunas; j++)
         {
-            ax[i]=x[j]*a[i][j]
+            if (j==1)
+            {
+                ax[i]=a[i][j]*x[j];
+            }else{
+                ax[i]=ax[i]+(a[i][j]*x[j]);
+            }
         }
         y[i]=ax[i]+y[i];
     }

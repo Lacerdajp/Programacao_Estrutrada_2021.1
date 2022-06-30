@@ -2,7 +2,7 @@
 #define MAX 10000
 void incluirVetor(float vetor[], int n,char nome){
 
- for (int i = 0; i < n; i++)
+ for (int i = 1; i <= n; i++)
     {
         printf("Digite o valor de %c%d: ",nome,i);
         scanf("%f",&vetor[i]); 
@@ -10,7 +10,7 @@ void incluirVetor(float vetor[], int n,char nome){
 }
 void imprimirVetor(float vetor[],int n){
      printf("O vetor final e : Y = (");
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
         printf("%.2f ",vetor[i]);
     }
@@ -28,7 +28,7 @@ int main(){
     scanf("%d",&n);
     incluirVetor(x,n,'X');
     incluirVetor(y,n,'Y');
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {    
         y[i]=(a*x[i])+y[i];
         
