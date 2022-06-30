@@ -57,14 +57,23 @@ int main(){
     incluirVetor(y,mLinhas,'Y');
     printf("Preenchendo a matriz A: \n");
     incluirMatriz(a,mLinhas,nColunas);
+   for (int i = 1; i <= nColunas; i++)
+    {
+        for (int j = 1; j <= mLinhas; j++)
+        {
+            if (i==1)
+            {
+                ax[j]=a[j][i]*x[i];
+            }else{
+                ax[j]=ax[j]+(a[j][i]*x[i]);
+            }
+        }
+    }
     for (int i = 1; i <= mLinhas; i++)
     {
-        for (int j = 1; j <= nColunas; j++)
-        {
-            ax[i]=x[j]*a[i][j]
-        }
-        y[i]=ax[i]+y[i];
+         y[i]=ax[i]+y[i];
     }
+    
     
     imprimirVetor(y,mLinhas);
 
