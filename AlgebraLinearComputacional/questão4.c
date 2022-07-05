@@ -20,6 +20,12 @@ void zerarmatriz(float matriz[31][4]){
     }
     
 }
+float modular(float k){
+    if(k<0){
+        k=-k;
+    }
+    return k;
+}
 void imprimirMatriz(float matriz[31][4]){
     printf("      GJ           GS         SOR         GR\nI     ");
         for (int i = 0; i < 31; i++)
@@ -52,7 +58,7 @@ void passaVetor(float vetork[],float vetork1[],int n){
     }
 }
 float buscaMaiorValor(float vetor[],int n){
-    int maior=vetor[1];
+    float maior=vetor[1];
     for (int i = 1; i < n; i++)
     {
         if (vetor[i]>maior)
@@ -63,16 +69,17 @@ float buscaMaiorValor(float vetor[],int n){
     }
     return maior;
 }
-int subtracaoVetor(float v1[],float v2[],int n){
+float subtracaoVetor(float v1[],float v2[],int n){
     float result[n];
     float maior=0;
     for (int i = 1; i <= n; i++)
     {
         result[i]=v1[i]-v2[i];
-
+        result[i]=modular(result[i]);
         
     }
     maior=buscaMaiorValor(result,n);
+    
     return maior;
     
 }
@@ -101,6 +108,7 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
             }
         }
         subtracao=subtracaoVetor(temp,vetor,n);
+        
         if (subtracao<pow(10,-4))
         {
             break;
@@ -110,14 +118,16 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
     }
     return interacao;
  }
- int metodoGaussSeidel(float vetor[],int n,float calc){
-        
+ int metodoGaussSeidel(float vetor[],int n,float calc,int inte){
+
     int interacao=0;
     float temp[n];
     float subtracao=1;
-     zerarVetor(temp,n);
-    while (subtracao>=0.0001)
+    zerarVetor(temp,n);
+    if (inte==NULL)
     {
+    while (subtracao>=0.0001)
+        {
         
         passaVetor(vetor,temp,n);
         for (int i = 1; i <= n; i++){
@@ -143,12 +153,62 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
         
         interacao++;
     }
+    }
+    else{
+         while (interacao!=inte){
+        
+        for (int i = 1; i <= n; i++){
+            if (i==1)
+            {
+                vetor[i]=(1.0-vetor[i+1])/calc;
+                
+                
+            }else if (i==n)
+            {
+                
+                vetor[i]=(1.0-vetor[i-1])/calc;
+                 
+            }else{
+                vetor[i]=(-vetor[i+1]-vetor[i-1])/calc; 
+            }
+        }
+        if (interacao==inte)
+        {
+            break;
+        }
+        
+        interacao++;
+    };
+    }
     return interacao;
 
  };
- void metodoSOR(){
-
+ float metodoSOR(float vetor[],int n,float calc ){
+    float w=0.5;
+    float temp[n];
+    float gs[n];
+    int interacao=0;
+    float subtracao=1;
+    zerarVetor(temp,n);
+    while (subtracao>=0.0001)
+    {
+        passaVetor(vetor,temp,n);
+        metodoGaussSeidel(gs,n,calc,interacao+1);
+        for (int i = 1; i <= n; i++){
+            temp[i]=w*gs[i]+w*vetor[i];
+        }
+        subtracao=subtracaoVetor(temp,vetor,n);
+        
+        if (subtracao<pow(10,-4))
+        {
+            break;
+        }
+        
+        interacao++;
+    }
+    return interacao;
  };
+
  void metodoGradiente();
  int main(){
     int escolha;
@@ -157,7 +217,7 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
     int n=30;
     float c=-(2*(1+pow(h,2)));
     float x[n];
-    char estadoMetodo[4]={'o','o','o','0'};
+    char estadoMetodo[4]={'o','o','o','o'};
     float matriz[31][4];
     zerarmatriz(matriz);
 
@@ -177,7 +237,7 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
         {
             printf("3.SOR\n");
         }
-         if (estadoMetodo[2]=='o')
+         if (estadoMetodo[3]=='o')
         {
             printf("4.Gradiente\n");
         }
@@ -200,7 +260,7 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
             estadoMetodo[0]='x';
             break;
         case 2:
-             f=metodoGaussSeidel(x,n,c);
+             f=metodoGaussSeidel(x,n,c,NULL);
                for (int j = 0; j < 31; j++)
                {
                    if(j==0){
@@ -211,9 +271,21 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
                    }
                }
             imprimirMatriz(matriz);
-            estadoMetodo[0]='x';
+            estadoMetodo[1]='x';
             break;
         case 3:
+             f=metodoSOR(x,n,c);
+               for (int j = 0; j < 31; j++)
+               {
+                   if(j==0){
+                   matriz[j][2]=(float)f;
+                   }
+                   else{
+                    matriz[j][2]=x[j];
+                   }
+               }
+            imprimirMatriz(matriz);
+            estadoMetodo[2]='x';
 
             break;
         case 4: 
@@ -221,6 +293,7 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
             break;
         default:
             escolha=0;
+            imprimirMatriz(matriz);
 
             break;
         }
@@ -228,5 +301,5 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
     } while (escolha!=0);
     
     
-    return 0;
+    return 0;;
  }
