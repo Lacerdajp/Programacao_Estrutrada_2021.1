@@ -103,7 +103,7 @@ static inline size_t card(const NODETYPE * a, int nb)
  *
  * \return Bitmap corresponding to the neigborhood of \c i in \c g.
  */
-static inline NODETYPE const * vizinhanca(Graph * g, unsigned int i) {
+static inline NODETYPE * vizinhanca(Graph * g, unsigned int i) {
 	return g->E + i * g->tamL;
 }
 
@@ -151,7 +151,47 @@ static inline void adic_aresta(Graph * g, unsigned int i, unsigned int j) {
  * \param N Mapa de bits a preencher com a vizinhaça comum a \c i e \c j
  *
  */
-static inline void viz_comum(Graph * g, unsigned int i, unsigned int j, NODETYPE const * N) {
+static inline NODETYPE * reter(NODETYPE* s,NODETYPE * r,int nb ){
+	
+	int i=0;
+	for ( i = 0; i < nb ; i++)
+	{
+		s[i]=s[i] & r[i];
+	}
+	return s;
 }
+static inline void  viz_comum(Graph * g, unsigned int i, unsigned int j, NODETYPE* N) {
+	NODETYPE * s = vizinhanca(g,i);
+	NODETYPE * r=vizinhanca(g,j);
+	N=reter(s,r,g->tamL);
+}
+
+
+unsigned int maior_context(Graph* context){
+	size_t maior=0;
+	NODETYPE* n;
+	size_t  k;
+	size_t maiorI;
+	size_t maiorJ;
+	for (int i = 0; i < context->n; i++)
+	{
+		for (int j = 0; j < context->n; j++)
+		{
+		   if (i!=j)
+		   {
+				viz_comum(context,i,j,n);
+				k=card(n,context->n);
+				if (k>maior){
+					maior=k;
+					maiorI=i;
+					maiorJ=j;
+				}
+		   }
+		}
+	}
+	printf("Maior contexto comum: \n%s \n%s",context->leg[maiorI],context->leg[maiorJ]);
+	
+}
+
 
 #endif /* GRAPH_H_ */

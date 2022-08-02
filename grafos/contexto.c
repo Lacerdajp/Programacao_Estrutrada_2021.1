@@ -58,20 +58,22 @@ int main(int argc, char *argv[])
 	FILE* vertFile = fopen(argv[1], "r");
 	char linestr[200];
 
-	char * v = fgets(linestr, 20, vertFile);
+	char * v = fgets(linestr, 20, vertFile);//lê de vl antes
+	
 	char * e;
-	size_t n = strtol(v, &e, 10);
+	size_t n = strtol(v, &e, 10);//transforma em int
 	if (v == e)
-		return 0;
+		return 0;//caso de merda
 
 	char * legenda[n];
 	int i = 0;
 
-	v = fgets(linestr, 200, vertFile);
+	v = fgets(linestr, 200, vertFile);//le de vl pos
+	
 	while (v != NULL) {
-		size_t l = strlen(linestr);
-		legenda[i] = calloc(l, sizeof(char));
-		strncpy(legenda[i++], linestr, l);
+		size_t l = strlen(linestr);//pega o tamanho  v
+		legenda[i] = calloc(l, sizeof(char));//armazena
+		strncpy(legenda[i++], linestr, l);//muda de line str emanda pra legenda
 		v = fgets(linestr, 200, vertFile);
 	}
 	fclose(vertFile);
@@ -84,11 +86,12 @@ int main(int argc, char *argv[])
 	Graph g_contexto = { n, legenda, E, TAML(n) };
 	int j = 0;
 
-	v = fgets(linestr, 200, edgeFile);
+	v = fgets(linestr, 200, edgeFile);//pega o valor de el
+	
 	while (v != NULL) {
-		i = atoi(strtok(linestr, " "));
-		j = atoi(strtok(NULL, " "));
-	    adic_aresta(&g_contexto, i, j);
+		i = atoi(strtok(linestr, " "));//separa valores da linha
+		j = atoi(strtok(NULL, " "));	  
+	    adic_aresta(&g_contexto, i, j);//
 		v = fgets(linestr, 200, edgeFile);
 	}
 	fclose(edgeFile);
@@ -103,6 +106,7 @@ int main(int argc, char *argv[])
     ordem_semantica_decresc(&g_contexto, ord);
     for (i = 0; i < g_contexto.n; i++)
     	printf("%s",g_contexto.leg[ord[i]]);
+	maior_context(&g_contexto); 
 
     return 0;
 }
