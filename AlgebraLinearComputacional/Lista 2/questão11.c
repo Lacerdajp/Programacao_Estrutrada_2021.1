@@ -261,12 +261,95 @@ int main(){
     double matriz[n][n];
     double vetor[n];
     double x[n];
+    char estadoMetodo[2]={'o','o'};
+    int escolha;
     zerarVetor(x);
     incluirVetor(vetor);
-     incluirMatriz(matriz);
+    incluirMatriz(matriz);
+    do
+    {
+        printf("Escolha um metodo para ser resolvido: \n");
+        if (estadoMetodo[0]=='o')
+        {
+            printf("1.Eliminacao de Gauss, Pivoteamento Total\n");
+        }
+         if (estadoMetodo[1]=='o')
+        {
+            printf("1.Eliminacao de Gauss, Pivoteamento Parcial\n");
+        }
+        //  if (estadoMetodo[2]=='o')
+        // {
+        //     printf("1.LU\n");
+        // }
+        //  if (estadoMetodo[3]=='o')
+        // {
+        //     printf("4.Gradiente\n");
+        // }
+
+        printf("5.Finalizar Testes\n");
+        scanf("%d",&escolha);
+        switch (escolha)
+        {
+        case 1:
+            pivoteamentoParcial(matriz,vetor,x);
+            imprimirMatriz(matriz,vetor);
+            imprimirVetor(x);
+            break;
+        case 2:
+             f=metodoGaussSeidel(x,n,c,NULL);
+               for (int j = 0; j < 31; j++)
+               {
+                   if(j==0){
+                   matriz[j][1]=(float)f;
+                   }
+                   else{
+                    matriz[j][1]=x[j];
+                   }
+               }
+            imprimirMatriz(matriz);
+            estadoMetodo[1]='x';
+            break;
+        case 3:
+             f=metodoSOR(x,n,c);
+               for (int j = 0; j < 31; j++)
+               {
+                   if(j==0){
+                   matriz[j][2]=(float)f;
+                   }
+                   else{
+                    matriz[j][2]=x[j];
+                   }
+               }
+            imprimirMatriz(matriz);
+            estadoMetodo[2]='x';
+
+            break;
+        case 4: 
+            f=metodoGradiente(x,n,c);
+             for (int j = 0; j < 31; j++)
+               {
+                   if(j==0){
+                   matriz[j][3]=(float)f;
+                   }
+                   else{
+                    matriz[j][3]=x[j];
+                   }
+               }
+            imprimirMatriz(matriz);
+            estadoMetodo[3]='x';
+            break;
+        default:
+            escolha=0;
+            imprimirMatriz(matriz);
+
+            break;
+        }
+
+    } while (escolha!=0);
+
      pivoteamentoTotal(matriz,vetor,x);
      imprimirMatriz(matriz,vetor);
-    //  imprimirVetor(x);
+     imprimirVetor(x);
 
 
     return 0;
