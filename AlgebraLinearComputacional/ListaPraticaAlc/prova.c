@@ -30,10 +30,10 @@ void imprimirMatriz(double matriz[N][N],double vetor[]){
            {
                if (j==(N-1))
                {
-                   printf("%.2lf = %.2lf\n",matriz[i][j], vetor[i]);
+                   printf("%5.2lf = %5.2lf\n",matriz[i][j], vetor[i]);
                }
                else{
-                   printf("%.2lf ",matriz[i][j]);
+                   printf("%5.2lf ",matriz[i][j]);
                }
            }
            
@@ -73,7 +73,6 @@ void incluirMatriz(double matriz[N][N]){
     }
 }
 //Vetores(doubles)
-
 void zerarVetor(double vetor[]){
 
  for (int i = 0; i < N; i++)
@@ -109,9 +108,7 @@ void incluirVetor(double vetor[]){
     
 
 }
-
 //Vetores(Vector)
-
 void definirPosicao(Vector x[]){
     for (int i = 0; i < N; i++)
     {
@@ -293,8 +290,8 @@ void pivoteamentoTotal(double matriz[N][N], double vetor[],Vector x[]){
         
         pivo=definirPivoTotal(matriz,vetor,iteracao,x);
         //  printf("\nNumero da Iteracao %d: Matriz depos das trocas de Linhas\n ",iteracao);
-        //   imprimirMatriz(matriz,vetor);
-        //   printf("\n------------------------------------------------------------------------------------------------------------------\n");
+        //    imprimirMatriz(matriz,vetor);
+        //    printf("\n------------------------------------------------------------------------------------------------------------------\n");
         
         for (int linha = iteracao+1; linha < N; linha++)
         {
@@ -312,7 +309,7 @@ void pivoteamentoTotal(double matriz[N][N], double vetor[],Vector x[]){
 
 void decomposicaoLU(double matriz[N][N], double vetor[],Vector x[]){
     double pivo;
-    double mL=0;
+   double m[N][N];
     for (int iteracao = 0; iteracao < N; iteracao++)
     {   
     //   printf("\nNumero da Iteracao %d: Matriz antes das trocas de Linhas\n ",iteracao);
@@ -325,13 +322,13 @@ void decomposicaoLU(double matriz[N][N], double vetor[],Vector x[]){
         
         for (int linha = iteracao+1; linha < N; linha++)
         {
-            mL=matriz[linha][iteracao]/pivo;
-            matriz[linha][iteracao]=mL;
+            m[linha][iteracao]=matriz[linha][iteracao]/pivo;
+            matriz[linha][iteracao]=m[linha][iteracao];
             for (int coluna = 0; coluna < N; coluna++)
             {
-                matriz[linha][coluna]=matriz[linha][coluna]+((-mL)*matriz[iteracao][coluna]);
+                matriz[linha][coluna]=matriz[linha][coluna]+((-m[linha][iteracao])*matriz[iteracao][coluna]);
             }
-            vetor[linha]=vetor[linha]-(mL*vetor[iteracao]);
+            vetor[linha]=vetor[linha]-(m[linha][iteracao]*vetor[iteracao]);
             
         }
     }

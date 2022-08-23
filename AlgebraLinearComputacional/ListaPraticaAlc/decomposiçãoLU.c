@@ -23,14 +23,14 @@ void zerarmatriz(double matriz[N][N]){
     }
     
 }
-void imprimirMatriz(double matriz[N][N],double vetor[]){
+void imprimirMatriz(double matriz[N][N]){
         for (int i = 0; i < N; i++)
         {
            for (int j = 0; j < N; j++)
            {
                if (j==(N-1))
                {
-                   printf("%.2lf = %.2lf\n",matriz[i][j], vetor[i]);
+                   printf("%.2lf \n",matriz[i][j]);
                }
                else{
                    printf("%.2lf ",matriz[i][j]);
@@ -147,9 +147,9 @@ void imprimirVector(Vector vetor[]){
         }
         
 }
-void decomposicaoLU(double matriz[N][N], double vetor[],Vector x[]){
-    double pivo;
-    double mL=0;
+void decomposicaoLU(double matriz[N][N]){
+    double pivos;
+    double m[N][N];
     for (int iteracao = 1; iteracao < N; iteracao++)
     {   
     //   printf("\nNumero da Iteracao %d: Matriz antes das trocas de Linhas\n ",iteracao);
@@ -162,13 +162,12 @@ void decomposicaoLU(double matriz[N][N], double vetor[],Vector x[]){
         
         for (int linha = iteracao+1; linha < N; linha++)
         {
-            mL=-matriz[linha][iteracao]/matriz[iteracao][iteracao];
-            matriz[linha][iteracao]=-mL;
+            m[linha][iteracao]=-matriz[linha][iteracao]/matriz[iteracao][iteracao];
+            matriz[linha][iteracao]=-m[linha][iteracao];
             for (int coluna = iteracao+1; coluna < N; coluna++)
             {
-                matriz[linha][coluna]=matriz[linha][coluna]+(mL*matriz[iteracao][coluna]);
+                matriz[linha][coluna]=matriz[linha][coluna]+(m[linha][iteracao]*matriz[iteracao][coluna]);
             }
-            vetor[linha]=vetor[linha]+(mL*vetor[iteracao]);
             
         }
     }
@@ -191,10 +190,10 @@ int main(){
             
         }
     }
-    imprimirMatriz(matriz,vetor);
+    imprimirMatriz(matriz);
     printf("\n");
-        decomposicaoLU(matriz,vetor,x);
-         imprimirMatriz(matriz,vetor);
+    decomposicaoLU(matriz);
+    imprimirMatriz(matriz);
 
 
     return 0;
