@@ -158,7 +158,7 @@ void calcularResultante(double matriz[N][N],double vetor[],Vector x[]){
             if (linha==coluna)
             {
                 x[coluna].valor=(vetor[linha]-soma)/matriz[linha][coluna];
-                // printf("(%d) %.2lf = %.2lf - %.2lf/ %.2lf(linha %d coluna %d)\n ",x[coluna].posicao,x[coluna].valor,  vetor[linha], soma, matriz[linha][coluna],linha, coluna);
+                 printf("(%d) %.2lf = %.2lf - %.2lf/ %.2lf(linha %d coluna %d)\n ",x[coluna].posicao,x[coluna].valor,  vetor[linha], soma, matriz[linha][coluna],linha, coluna);
                 break;
             }
             else{
@@ -184,7 +184,7 @@ double definirPivoParcial(double matriz[N][N],double vetor[],int iteracao){
                  
             }
         } 
-        for (int coluna = 0; coluna < N; coluna++)
+        for (int coluna = iteracao; coluna < N; coluna++)
         {
                     aux=matriz[linhaMaior][coluna];
                     matriz[linhaMaior][coluna]=matriz[iteracao][coluna];
@@ -224,60 +224,55 @@ double definirPivoTotal(double matriz[N][N],double vetor[],int iteracao,Vector x
     double pivo;
     double aux;
     int auxInt;
-    int c=0;
-    int maior=iteracao;
+    // int c=0;
+    // int maior=iteracao;
     double maiorValor;
-    // int maiorLinha,maiorCol;
-    // maiorLinha=maiorCol=iteracao;
+    int maiorLinha,maiorCol;
+    maiorLinha=maiorCol=iteracao;
     pivo=maiorValor=matriz[iteracao][iteracao];
-       for (int coluna = iteracao; coluna < N; coluna++)
+      
+        for (int linha = iteracao; linha < N; linha++)
+        { for (int coluna = iteracao; coluna < N; coluna++)
         {
-            if (matriz[iteracao][coluna]>=maiorValor)
+            if (matriz[linha][coluna]>=maiorValor)
             {
-                maiorValor=matriz[iteracao][coluna];
-                c=1;
-                maior=coluna;
+                maiorValor=matriz[linha][coluna];
+                maiorCol=coluna;
+                maiorLinha=linha;
             }
         } 
-        for (int linha = iteracao; linha < N; linha++)
-        {
-            if (matriz[linha][iteracao]>=maiorValor)
-            {
-                maiorValor=matriz[linha][iteracao];
-                c=2;
-                maior=linha;
-            }
         }
-         
-        if (c==1)
-        {
-            //  printf("\nFOI TROCADO Colunas %d e %d",iteracao, maiorColuna);
-            for (int linha = 0; linha < N; linha++)
-            {
-                aux=matriz[linha][maior];
-                    matriz[linha][maior]=matriz[linha][iteracao];
-                    matriz[linha][iteracao]=aux;
-            }
-            auxInt=x[iteracao].posicao;
-            x[iteracao].posicao=x[maior].posicao;
-            x[maior].posicao=auxInt;
-            
-            
-        }
-        
-        if (c==2)
+        if (maiorLinha!=iteracao)
         {
         // printf("\nFOI TROCADO LINHAS %d e %d",iteracao, maiorLinha);
         for (int coluna = iteracao; coluna < N; coluna++)
         {
-                    aux=matriz[maior][coluna];
-                    matriz[maior][coluna]=matriz[iteracao][coluna];
+                    aux=matriz[maiorLinha][coluna];
+                    matriz[maiorLinha][coluna]=matriz[iteracao][coluna];
                     matriz[iteracao][coluna]=aux;
         }
-         aux=vetor[maior];
-         vetor[maior]=vetor[iteracao];
+         aux=vetor[maiorLinha];
+         vetor[maiorLinha]=vetor[iteracao];
          vetor[iteracao]=aux;
         }
+        if (maiorCol!=iteracao)
+        {
+            //  printf("\nFOI TROCADO Colunas %d e %d",iteracao, maiorColuna);
+            for (int linha = 0; linha < N; linha++)
+            {
+                aux=matriz[linha][maiorCol];
+                    matriz[linha][maiorCol]=matriz[linha][iteracao];
+                    matriz[linha][iteracao]=aux;
+            }
+            auxInt=x[iteracao].posicao;
+            x[iteracao].posicao=x[maiorCol].posicao;
+            x[maiorCol].posicao=auxInt;
+            
+            
+        }
+        
+        
+       
        
     return pivo=matriz[iteracao][iteracao];
 
@@ -299,34 +294,6 @@ void pivoteamentoTotal(double matriz[N][N], double vetor[],Vector x[]){
         for (int linha = iteracao+1; linha < N; linha++)
         {
             mL=matriz[linha][iteracao]/pivo;
-            for (int coluna = 0; coluna < N; coluna++)
-            {
-                matriz[linha][coluna]=matriz[linha][coluna]+((-mL)*matriz[iteracao][coluna]);
-            }
-            vetor[linha]=vetor[linha]-(mL*vetor[iteracao]);
-            
-        }
-    }
-    calcularResultante(matriz,vetor,x);
-}
-
-void decomposicaoLU(double matriz[N][N], double vetor[],Vector x[]){
-    double pivo;
-    double mL=0;
-    for (int iteracao = 0; iteracao < N; iteracao++)
-    {   
-    //   printf("\nNumero da Iteracao %d: Matriz antes das trocas de Linhas\n ",iteracao);
-    //       imprimirMatriz(matriz,vetor); 
-        
-        pivo=definirPivoTotal(matriz,vetor,iteracao,x);
-        //  printf("\nNumero da Iteracao %d: Matriz depos das trocas de Linhas\n ",iteracao);
-        //   imprimirMatriz(matriz,vetor);
-        //   printf("\n------------------------------------------------------------------------------------------------------------------\n");
-        
-        for (int linha = iteracao+1; linha < N; linha++)
-        {
-            mL=matriz[linha][iteracao]/pivo;
-            matriz[linha][iteracao]=mL;
             for (int coluna = 0; coluna < N; coluna++)
             {
                 matriz[linha][coluna]=matriz[linha][coluna]+((-mL)*matriz[iteracao][coluna]);
@@ -364,11 +331,6 @@ int main(){
             break;
         case 2:
         pivoteamentoParcial(matriz,vetor,x);
-         imprimirMatriz(matriz,vetor);
-        imprimirVector(x);
-            break;
-        case 3:
-        decomposicaoLU(matriz,vetor,x);
          imprimirMatriz(matriz,vetor);
         imprimirVector(x);
             break;
