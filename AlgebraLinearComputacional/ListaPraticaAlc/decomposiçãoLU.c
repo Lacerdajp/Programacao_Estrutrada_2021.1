@@ -150,7 +150,7 @@ void imprimirVector(Vector vetor[]){
 void decomposicaoLU(double matriz[N][N]){
     double pivos;
     double m[N][N];
-    for (int iteracao = 1; iteracao < N; iteracao++)
+    for (int iteracao = 0; iteracao < N; iteracao++)
     {   
     //   printf("\nNumero da Iteracao %d: Matriz antes das trocas de Linhas\n ",iteracao);
     //       imprimirMatriz(matriz,vetor); 
