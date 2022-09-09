@@ -40,6 +40,25 @@ void imprimirMatriz(double matriz[N][N]){
         }
         
 }
+void gerarMatrizIdentidade(double matriz[N][N]){
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            if (i==j)
+            {
+                matriz[i][j]=1;
+            }else
+            {
+                matriz[i][j]=0;
+            }
+            
+            
+        }
+        
+    }
+    
+}
 void incluirMatriz(double matriz[N][N]){
     zerarmatriz(matriz);
     for(int i=0; i<N;i++){
@@ -172,6 +191,70 @@ void decomposicaoLU(double matriz[N][N]){
         }
     }
 }
+void separarLU(double matriz[N][N]){
+
+    double L[N][N];
+    double U[N][N];
+    double m;
+    for (int  linha = 0; linha < N; linha++)
+    {
+        for (int coluna= 0; coluna < N; coluna++)
+        {
+            
+            if(coluna==linha){
+                L[linha][coluna]=1;
+                U[linha][coluna]=matriz[linha][coluna];
+            }
+            else if (linha>coluna)
+            {
+                m= matriz[linha][coluna];
+                L[linha][coluna]=m;
+                U[linha][coluna]=0;
+            }
+            else{
+                U[linha][coluna]=matriz[linha][coluna];
+                L[linha][coluna]=0;
+            }
+            
+        }
+        
+    }
+    printf("matriz L: \n");
+    imprimirMatriz(L);
+    
+    printf("\n");
+    printf("matriz U: \n");
+    imprimirMatriz(U);
+    printf("\n");
+    printf("matriz LU: \n");
+
+}
+void calcularInversa(double matriz[N][N]){
+    double identidade[N][N];
+    double pivo;
+    double m;
+    gerarMatrizIdentidade(identidade);
+    for(int coluna = 0; coluna < N; coluna++){
+    pivo = matriz[coluna][coluna];
+    	for(int k = 0; k < N; k++){
+		matriz[coluna][k] = (matriz[coluna][k])/(pivo); //L1 -> L1/pivo , L2 -> L2/pivo, L3 -> L3/pivo
+		identidade[coluna][k] = (identidade[coluna][k])/(pivo); //Ex: 1 0 0 / pivo  , 0 1 0 / pivo,   0 0 1/ pivo
+        }
+    
+	for(int linha = 0; linha < N; linha++){
+		if(linha != coluna){
+			m = matriz[linha][coluna];
+           			for(int k = 0; k < N; k++){
+			matriz[linha][k] = (matriz[linha][k]) - (m*matriz[coluna][k]); //Ex: L2 -> L2 - ( 1"m" - L1) 
+			identidade[linha][k] = (identidade[linha][k]) - (m*identidade[coluna][k]);  
+    			}
+    		}
+    	}
+      
+}     printf("\n");
+        imprimirMatriz(identidade);
+        printf("\n");
+}
 int main(){
     
     double matriz[N][N];
@@ -192,7 +275,9 @@ int main(){
     }
     imprimirMatriz(matriz);
     printf("\n");
-    decomposicaoLU(matriz);
+    printf("\n");
+    calcularInversa(matriz);
+    printf("\n");
     imprimirMatriz(matriz);
 
 
