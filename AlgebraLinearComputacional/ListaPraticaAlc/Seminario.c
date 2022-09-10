@@ -121,6 +121,13 @@ void passaVetor(double a[], double b[], int n)
         b[i] = a[i];
     }
 }
+void zerarVetor(double a[],int n){
+    for (int i = 0; i < n; i++)
+    {
+        a[n]=0;
+    }
+    
+}
 void imprimirVetor(double vetor[], int n)
 {
     for (int i = 0; i < n; i++)
@@ -129,7 +136,7 @@ void imprimirVetor(double vetor[], int n)
     }
 }
 //Calculos
-void projecao(double a[], double b[], int n)
+void projecao(double a[], double b[],double resultado[], int n)
 {
     double somatorio1 = 0;
     double somatorio2 = 0;
@@ -140,7 +147,7 @@ void projecao(double a[], double b[], int n)
     }
     for (int i = 0; i < n; i++)
     {
-        a[i] = (somatorio1 / somatorio2) * a[i];
+        resultado[i] = (somatorio1 / somatorio2) * a[i];
     }
 }
 double magnitude(double a[], int n)
@@ -153,8 +160,36 @@ double magnitude(double a[], int n)
     return sqrt(somatorio);
 }
 
+
 //DeComposiçãoQR
 void decomposicaoQR(double A[N][N],double Q[N][N],double R[N][N],int linhas,int colunas){
+    double U[linhas][colunas];
+    double E[linhas][colunas];
+    double somatorio[linhas];
+    double a[linhas];
+    double u[linhas];
+    zerarVetor(a);
+    zerarVetor(somatorio);
+    for (int i = 0; i < colunas; i++)
+    {
+        for (int j = 0; j < linhas; j++)
+        {
+            
+            if (i==0)
+            {
+                U[j][i]=A[j][i];
+            }
+            else{
+                
+            }
+            
+        }
+        
+        
+    }
+    
+
+
     
     
 }
