@@ -225,6 +225,7 @@ int metodoGaussJacobi(float vetor[],int n,float calc){
     }
     return interacao;
  };
+//erro
 
  int metodoGradiente(float vetor[],int n,float calc){
     int interacao=0;
