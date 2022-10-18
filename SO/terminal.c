@@ -52,19 +52,11 @@ char *ler_linha(void){
 	char *linha = NULL;
 	ssize_t tam = 0;
 
-	if(getline(&linha, &tam, stdin) == -1){
-		if(feof(stdin)){
-			exit(EXIT_SUCCESS); // recebemos um EOF
-		} else {
-			perror("readline");
-			exit(EXIT_FAILURE);
-		}
-	}
+	getline(&linha, &tam, stdin);
 
 	return linha;
 }
 
-// retorna um vetor com os tokens da linha
 char **divide_linha(char *linha){
 
 	int toks_linha = QTD_TOKS_LINHA;
