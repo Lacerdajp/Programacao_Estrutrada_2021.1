@@ -157,16 +157,18 @@ void loop(){
 	char *linha;
 	char **args;
 	int status;
-
+	char*valor="pwd";
 	do{
-		printf("Fale com o lacerda > ");
+		
+		printf("Fale com o lacerda(");
+		
+		printf(")>");
 		linha = ler_linha();
 		args = divide_linha(linha);
 		status = executar(args);
 
 		free(linha);
 		free(args);
-
 	} while(status);
 }
 
