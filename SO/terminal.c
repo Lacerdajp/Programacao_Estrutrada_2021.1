@@ -161,7 +161,7 @@ void loop(){
 	do{
 		
 		printf("Fale com o lacerda(");
-		
+		launch(divide_linha(valor));
 		printf(")>");
 		linha = ler_linha();
 		args = divide_linha(linha);
